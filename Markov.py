@@ -15,6 +15,10 @@ similar to the following"""
 
 import sys
 
+import random
+
+from string import join
+
 test_string = """O life of this our spring! why fades the lotus of the water?
 Why fade these children of the spring? born but to smile & fall.
 Ah! Thel is like a watry bow, and like a parting cloud,
@@ -27,10 +31,7 @@ Of him that walketh in the garden in the evening time."""
 
 def make_san_list(corpus):
     word_list = corpus.split()
-    san_list = []
-    for word in word_list:
-        san_list.append(word.strip('.,"[]'))
-    return san_list
+    return word_list
 
 def make_chains(corpus):
     """Takes an input text as a string and returns a dictionary of
@@ -64,35 +65,39 @@ def make_chains(corpus):
 def make_text(chains):
     """Takes a dictionary of markov chains and returns random text
     based off an original text."""
-    # grab a random key... or something, and assign it to curr_key
-    # initialize a list with two elements, curr_key[0] and curr_key[1]
-    # NOW THE LOOP BEGINS!
+
+    curr_key = random.choice(chains.keys())
+    curr_list = [curr_key[0], curr_key[1]]
+    val_word = curr_key[1]
+
+    while "." not in val_word and "!" not in val_word and "?" not in val_word:
     # look up curr_key and get the value
-    # the value is a list. We need to select a random element from that list.
-    # we will call this random value rand_val
+        val_list = chains.get(curr_key)
+    # if the selected value is the end of the text, value will be None type, 
+    # and should break
+        if val_list == None:
+            break
+        else:
+            index = random.randint(0, len(val_list)-1)
+        val_word = val_list[index]
     # we append rand_val to our starter list
+        curr_list.append(val_word)
     # we reassign curr_key to (curr_key[1], value)
-    # in effect we're shifting our focus over one word, every iteration of the loop
-    # NOW THE LOOP ENDS!
-    # we join the list to make a giant, wonderful, fluffy text string.
-    # TODO figure out how the fuck random works
-    # TODO figure out how the fuck where we end the loop (probably punctuation)
-    return "Here's some random text."
-
-
-
+        curr_key = (curr_key[1], val_word)
+    sentence = join(curr_list)
+    print sentence  
 
 
 
 # def main():
-#     args = sys.argv
+#      args = sys.argv
 
-#     # Change this to read input_text from a file
-#     input_text = "Some text"
+#      # Change this to read input_text from a file
+#      input_text = open(filename).read()
 
-#     chain_dict = make_chains(input_text)
-#     random_text = make_text(chain_dict)
-#     print random_text
+#      chain_dict = make_chains(input_text)
+#      random_text = make_text(chain_dict)
+#      print random_text
 
 # if __name__ == "__main__":
 #     main()
