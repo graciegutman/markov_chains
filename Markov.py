@@ -15,8 +15,15 @@ similar to the following"""
 
 import sys
 
-test_string = """this is so we don't have to keep defining a string in the console. 
-we can just reference it in the console whenever we want. my name is test_string"""
+test_string = """O life of this our spring! why fades the lotus of the water?
+Why fade these children of the spring? born but to smile & fall.
+Ah! Thel is like a watry bow, and like a parting cloud,
+Like a reflection in a glass, like shadows in the water,
+Like dreams of infants, like a smile upon an infant's face,
+Like the dove's voice, like transient day, like music in the air:
+Ah! gentle may I lay me down, and gentle rest my head,
+And gentle sleep the sleep of death, and gentle hear the voice
+Of him that walketh in the garden in the evening time."""
 
 def make_san_list(corpus):
     word_list = corpus.split()
@@ -34,9 +41,6 @@ def make_chains(corpus):
     # if word 1 and 2 does not exist in the {} already, then add a key with a value of word three 
     #in the list
 
-    #"/n"
-    #for line in  sys.stdin:
-
     # Here's the general syntax that the loop over the text_list will take:
     # for i in range(len(list) - 2):
         # key = (a_list[i], a_list[i + 1])
@@ -52,12 +56,33 @@ def make_chains(corpus):
             chain_dict[temp_key] = [temp_value]
         else:
             chain_dict[temp_key].append(temp_value)
-    print chain_dict
-    
+    return chain_dict
+
+#TODO punctuation 
+
+
 def make_text(chains):
     """Takes a dictionary of markov chains and returns random text
     based off an original text."""
+    # grab a random key... or something, and assign it to curr_key
+    # initialize a list with two elements, curr_key[0] and curr_key[1]
+    # NOW THE LOOP BEGINS!
+    # look up curr_key and get the value
+    # the value is a list. We need to select a random element from that list.
+    # we will call this random value rand_val
+    # we append rand_val to our starter list
+    # we reassign curr_key to (curr_key[1], value)
+    # in effect we're shifting our focus over one word, every iteration of the loop
+    # NOW THE LOOP ENDS!
+    # we join the list to make a giant, wonderful, fluffy text string.
+    # TODO figure out how the fuck random works
+    # TODO figure out how the fuck where we end the loop (probably punctuation)
     return "Here's some random text."
+
+
+
+
+
 
 # def main():
 #     args = sys.argv
