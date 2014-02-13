@@ -50,7 +50,7 @@ def char_len_check(sentence):
 
 def no_punctuation(word):
     """If last character of a value matches ?, !, ., return False"""
-    return word[-1] not in ["?", "!", "."]:
+    return word[-1] not in ["?", "!", "."]
 
 def make_text(chains):
     """Takes a dictionary of markov chains and returns random text
