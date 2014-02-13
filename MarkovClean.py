@@ -48,11 +48,9 @@ def char_len_check(sentence):
         return True
     return False
 
-def has_punctuation(word):
+def no_punctuation(word):
     """If last character of a value matches ?, !, ., return False"""
-    if word[-1] in ["?", "!", "."]:
-        return False
-    return True
+    return word[-1] not in ["?", "!", "."]:
 
 def make_text(chains):
     """Takes a dictionary of markov chains and returns random text
@@ -62,8 +60,7 @@ def make_text(chains):
     curr_list = [curr_key[0], curr_key[1]]
     val_word = curr_key[1]
 
-    while has_punctuation(val_word):
-    # look up curr_key and get the value
+    while no_punctuation(val_word):
         val_list = chains.get(curr_key)
     # if the selected value is the end of the text, value will be None type, 
     # and should break
@@ -89,10 +86,6 @@ def main():
        random_text = make_text(chain_dict)
     return random_text
 
-if __name__ == "__main__":
-    main()
-
-
 def tweet():  
     api = twitter.Api(consumer_key=auth.twitter_key,
                      consumer_secret=auth.api_secret,
@@ -110,8 +103,7 @@ def tweet():
             print "quitting"
             return
 
-tweet()
-
-
+if __name__ == "__main__":
+    tweet()
 
 
