@@ -29,7 +29,7 @@ Ah! gentle may I lay me down, and gentle rest my head,
 And gentle sleep the sleep of death, and gentle hear the voice
 Of him that walketh in the garden in the evening time."""
 
-def make_san_list(corpus):
+def make_list(corpus):
     word_list = corpus.split()
     return word_list
 
@@ -46,7 +46,7 @@ def make_chains(corpus):
     # for i in range(len(list) - 2):
         # key = (a_list[i], a_list[i + 1])
         # value = list[i + 2]
-    san_list = make_san_list(corpus)
+    san_list = make_list(corpus)
 
     chain_dict = {}
     for i in range(len(san_list) -2):
@@ -85,19 +85,20 @@ def make_text(chains):
     # we reassign curr_key to (curr_key[1], value)
         curr_key = (curr_key[1], val_word)
     sentence = join(curr_list)
-    print sentence  
+    return sentence 
 
 
 
-# def main():
-#      args = sys.argv
+def main():
+     args = sys.argv
+     filename = args[1]
 
-#      # Change this to read input_text from a file
-#      input_text = open(filename).read()
+     # Change this to read input_text from a file
+     input_text = open(filename).read()
 
-#      chain_dict = make_chains(input_text)
-#      random_text = make_text(chain_dict)
-#      print random_text
+     chain_dict = make_chains(input_text)
+     random_text = make_text(chain_dict)
+     print random_text
 
-# if __name__ == "__main__":
-#     main()
+if __name__ == "__main__":
+    main()
